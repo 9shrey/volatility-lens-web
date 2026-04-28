@@ -1,0 +1,30 @@
+name: pipeline
+on:
+  schedule:
+    - cron: "0 6 * * *" # 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 15-volatility-lens-web/pipeline } }
+    env:
+      VLENS_PIPELINE_SECRET: ${{ secrets.VLENS_PIPELINE_SECRET }}
+      VLENS_BLOB_RW_TOKEN: ${{ secrets.VLENS_BLOB_RW_TOKEN }}
+      VLENS_BLOB_BASE_URL: ${{ vars.VLENS_BLOB_BASE_URL }}
+      VLENS_PIPELINE_GIT_SHA: ${{ github.sha }}
+      VLENS_PRODUCED_AT: ${{ github.event.head_commit.timestamp }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: python -m pip install -e .[dev]
+      - name: Publish bundle
+        run: |
+          python -m vlens.cli publish --config configs/full.yaml --out artifacts/${{ github.run_id }}
+          python -m vlens.cli verify --bundle artifacts/${{ github.run_id }}
+      - name: Upload to Blob (no-op without token)
+        run: python -m vlens.cli upload --bundle artifacts/${{ github.run_id }}

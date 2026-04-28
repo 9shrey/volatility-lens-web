@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Pipeline outputs
+pipeline/artifacts/
+!pipeline/artifacts/.gitkeep
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.vercel/
+.turbo/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.secret
+!pipeline/configs/dev.secret
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

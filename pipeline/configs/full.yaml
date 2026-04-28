@@ -1,0 +1,32 @@
+seed: 42
+
+universe:
+  tickers: [SPY, QQQ, IWM, AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA]
+
+data:
+  source: synthetic
+  start: 2019-01-01
+  end:   2024-12-31
+
+surface:
+  moneyness_grid: [-0.30, -0.20, -0.10, -0.05, 0.0, 0.05, 0.10, 0.20, 0.30]
+  tenor_grid_days: [7, 14, 30, 60, 90, 180, 365]
+  svi:
+    init: warm_start
+    bounds:
+      b_min: 0.0
+      sigma_min: 0.0001
+    arb_check: strict
+
+regime:
+  model: hmm_gaussian_k3
+  features: [rv_21, iv_minus_rv, rr_25d, term_slope]
+  refit_cadence: monthly
+  fit_window_years: 5
+
+publish:
+  bundle_root: pipeline/artifacts
+  signing:
+    secret_env: VLENS_PIPELINE_SECRET
+  upload:
+    target: vercel_blob

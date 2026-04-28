@@ -1,0 +1,20 @@
+"""Structured logging via stdlib (structlog optional)."""
+
+from __future__ import annotations
+
+import logging
+import sys
+
+_CONFIGURED = False
+
+
+def get_logger(name: str = "vlens") -> logging.Logger:
+    global _CONFIGURED
+    if not _CONFIGURED:
+        handler = logging.StreamHandler(sys.stderr)
+        handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s"))
+        root = logging.getLogger("vlens")
+        root.addHandler(handler)
+        root.setLevel(logging.INFO)
+        _CONFIGURED = True
+    return logging.getLogger(name)
