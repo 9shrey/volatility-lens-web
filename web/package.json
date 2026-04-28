@@ -12,8 +12,9 @@
     "test:e2e": "playwright test",
     "gen:schemas": "node ./scripts/gen-zod.mjs"
   },
+  "packageManager": "pnpm@9.7.0",
   "dependencies": {
-    "next": "14.2.5",
+    "next": "14.2.33",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "zod": "3.23.8",
@@ -34,7 +35,7 @@
     "postcss": "8.4.40",
     "autoprefixer": "10.4.19",
     "eslint": "8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint-config-next": "14.2.33",
     "vitest": "1.6.0",
     "@vitejs/plugin-react": "4.3.1",
     "@testing-library/react": "16.0.0",
