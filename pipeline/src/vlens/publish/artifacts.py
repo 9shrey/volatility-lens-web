@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
-import numpy as np
 
 from ..config.schema import RunConfig
 from ..data.schemas import (
@@ -42,9 +40,9 @@ def _produced_at() -> datetime:
     if override:
         ts = datetime.fromisoformat(override)
         if ts.tzinfo is None:
-            ts = ts.replace(tzinfo=timezone.utc)
-        return ts.astimezone(timezone.utc).replace(microsecond=0)
-    return datetime.now(timezone.utc).replace(microsecond=0)
+            ts = ts.replace(tzinfo=UTC)
+        return ts.astimezone(UTC).replace(microsecond=0)
+    return datetime.now(UTC).replace(microsecond=0)
 
 
 def _resolve_secret(env_name: str) -> str:
@@ -103,7 +101,6 @@ def build_for_ticker(
     quotes_per_day = _quotes_from_synthetic(path, cfg.surface.moneyness_grid)
 
     snapshots: list[SurfaceSnapshot] = []
-    warm: dict[float, "object | None"] = {}
     for i, d in enumerate(path.dates):
         snap = build_surface(
             symbol=symbol,

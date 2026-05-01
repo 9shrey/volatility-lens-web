@@ -29,7 +29,7 @@ class HMMResult:
     startprob: np.ndarray          # [K]
 
 
-def _try_hmmlearn(n_states: int, seed: int) -> "object | None":
+def _try_hmmlearn(n_states: int, seed: int) -> object | None:
     try:
         from hmmlearn.hmm import GaussianHMM  # type: ignore[import-not-found]
     except Exception:

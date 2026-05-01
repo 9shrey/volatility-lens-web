@@ -30,5 +30,5 @@ def test_hmm_state_assignment_shift_equivariant(shift: int) -> None:
     sb = [r.state for r in b.states]
     assert sa == sb  # state labels are functions of features, not dates
     # date alignment shifted by exactly `shift`
-    for ra, rb in zip(a.states, b.states):
+    for ra, rb in zip(a.states, b.states, strict=True):
         assert (rb.date - ra.date).days == shift

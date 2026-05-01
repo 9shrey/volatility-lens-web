@@ -10,7 +10,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    defaults: { run: { working-directory: 15-volatility-lens-web/pipeline } }
+    defaults: { run: { working-directory: pipeline } }
     env:
       VLENS_PIPELINE_SECRET: ${{ secrets.VLENS_PIPELINE_SECRET }}
       VLENS_BLOB_RW_TOKEN: ${{ secrets.VLENS_BLOB_RW_TOKEN }}

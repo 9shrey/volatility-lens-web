@@ -10,11 +10,11 @@ from .svi import (
 )
 
 __all__ = [
-    "make_grid",
     "build_surface",
-    "fit_svi_slice",
-    "svi_iv_curve",
-    "svi_total_variance",
     "butterfly_violations",
     "calendar_violations",
+    "fit_svi_slice",
+    "make_grid",
+    "svi_iv_curve",
+    "svi_total_variance",
 ]

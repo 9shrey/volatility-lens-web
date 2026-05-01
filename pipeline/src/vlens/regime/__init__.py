@@ -4,9 +4,9 @@ from .hmm import LookaheadError, fit_predict_hmm
 from .labels import build_features
 
 __all__ = [
-    "fit_predict_hmm",
     "LookaheadError",
+    "build_features",
     "changepoint_regime",
     "detect_changepoints",
-    "build_features",
+    "fit_predict_hmm",
 ]

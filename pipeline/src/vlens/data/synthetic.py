@@ -80,19 +80,20 @@ def generate_path(
     moneyness_grid: list[float],
     tenor_grid_days: list[int],
     seed: int,
-    params: SyntheticParams = SyntheticParams(),
+    params: SyntheticParams | None = None,
 ) -> SyntheticPath:
     """Generate a deterministic price path + SVI surface time series.
 
     The regime is a 3-state Markov chain whose state shifts the SVI base level
     and skew, producing recognizable patterns for the regime model to recover.
     """
+    params = params or SyntheticParams()
     g = rng(seed)
     dates = business_days(start, end)
     t = len(dates)
 
     # 3-state Markov chain (calm / normal / stress).
-    P = np.array(
+    transition = np.array(
         [
             [0.97, 0.025, 0.005],
             [0.03, 0.94, 0.03],
@@ -103,7 +104,7 @@ def generate_path(
     states = np.empty(t, dtype=np.int8)
     for i in range(t):
         states[i] = state
-        state = int(g.choice(3, p=P[state]))
+        state = int(g.choice(3, p=transition[state]))
 
     # Daily log returns whose vol depends on regime.
     state_vol = np.array([0.008, 0.013, 0.028])

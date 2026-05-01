@@ -26,7 +26,7 @@ def test_svi_fit_recovers_synthetic_iv_within_tolerance(
     iv = svi_iv_curve(ks, p, tenor)
     pts = [
         IVPoint(log_moneyness=float(k), tenor_years=tenor, iv=float(v))
-        for k, v in zip(ks, iv)
+        for k, v in zip(ks, iv, strict=True)
     ]
     res = fit_svi_slice(pts)
     fitted = svi_iv_curve(ks, res.params, tenor)

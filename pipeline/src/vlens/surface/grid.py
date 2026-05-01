@@ -1,4 +1,4 @@
-"""Canonical (log-moneyness × tenor) grid construction."""
+"""Canonical (log-moneyness x tenor) grid construction."""
 
 from __future__ import annotations
 

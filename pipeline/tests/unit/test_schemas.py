@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 import pytest
 from pydantic import ValidationError
@@ -11,9 +11,9 @@ from vlens.data.schemas import (
     GridSpec,
     IVPoint,
     OptionQuote,
-    SVIParams,
     SurfaceQuality,
     SurfaceSnapshot,
+    SVIParams,
 )
 
 
@@ -21,7 +21,7 @@ def test_option_quote_ask_below_bid_rejected() -> None:
     with pytest.raises(ValidationError):
         OptionQuote(
             symbol="SPY",
-            as_of=datetime(2024, 1, 2, tzinfo=timezone.utc),
+            as_of=datetime(2024, 1, 2, tzinfo=UTC),
             expiry=date(2024, 6, 21),
             strike=400,
             option_type="C",

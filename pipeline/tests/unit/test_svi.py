@@ -20,7 +20,7 @@ def _gen_slice(tenor: float = 0.25) -> list[IVPoint]:
     iv = svi_iv_curve(ks, true, tenor)
     return [
         IVPoint(log_moneyness=float(k), tenor_years=tenor, iv=float(v))
-        for k, v in zip(ks, iv)
+        for k, v in zip(ks, iv, strict=True)
     ]
 
 

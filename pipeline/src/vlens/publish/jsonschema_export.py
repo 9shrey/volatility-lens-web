@@ -5,23 +5,23 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from ..data import schemas as S
+from ..data import schemas as schema_models
 from ..utils.io import write_json
 
 _MODELS = [
-    S.OptionQuote,
-    S.IVPoint,
-    S.GridSpec,
-    S.SVIParams,
-    S.SurfaceQuality,
-    S.SurfaceSnapshot,
-    S.SkewMetric,
-    S.TermPoint,
-    S.RegimeStateRow,
-    S.RegimeSnapshot,
-    S.TickerIndexEntry,
-    S.TickerIndex,
-    S.Manifest,
+    schema_models.OptionQuote,
+    schema_models.IVPoint,
+    schema_models.GridSpec,
+    schema_models.SVIParams,
+    schema_models.SurfaceQuality,
+    schema_models.SurfaceSnapshot,
+    schema_models.SkewMetric,
+    schema_models.TermPoint,
+    schema_models.RegimeStateRow,
+    schema_models.RegimeSnapshot,
+    schema_models.TickerIndexEntry,
+    schema_models.TickerIndex,
+    schema_models.Manifest,
 ]
 
 
